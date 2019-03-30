@@ -32,14 +32,84 @@ def full_state(self):
 full_state.cmd = 0x11
 
 
+# shtrih
+
+def print_test_label(self):
+    return self.protocol.command_nopass(
+        0x44,
+        bytearray([ord('0'), ord('0'), ord('3'), ord('0')])
+    )
+print_test_label.cmd = 0x44
+
+
+def print_last_label(self):
+    return self.protocol.command_nopass(
+        0x42,
+        bytearray([ord('0'), ord('0'), ord('3'), ord('0')])
+    )
+print_last_label.cmd = 0x42
+
+
+def add_to_summator(self):
+    return self.protocol.command_nopass(
+        0xE1,
+        bytearray([ord('0'), ord('0'), ord('3'), ord('0')])
+    )
+add_to_summator.cmd = 0xE1
+
+def clean_summator(self):
+    return self.protocol.command_nopass(
+        0xE3,
+        bytearray([ord('0'), ord('0'), ord('3'), ord('0')])
+    )
+clean_summator.cmd = 0xE3
+
+def print_value_label(self):
+    return self.protocol.command_nopass(
+        0x41,
+        bytearray([ord('0'), ord('0'), ord('0'), ord('0')])
+    )
+print_value_label.cmd = 0x42
+
+def set_type(self, plu):
+    return self.protocol.command_nopass(
+        0x37,
+        bytearray([ord('0'), ord('0'), ord('0'), ord('0'), plu, 0]),
+    )
+set_type.cmd = 0x37
+
+def get_empty_plu(self):
+    return self.protocol.command_nopass(
+        0x5B,
+        bytearray([ord('0'), ord('0'), ord('3'), ord('0')]),
+    )
+get_empty_plu.cmd = 0x5B
+
+
+
+def get_weight(self):
+    return self.protocol.command_nopass(
+        0x38,
+        bytearray([ord('0'), ord('0'), ord('3'), ord('0')])
+    )
+get_weight.cmd = 0x38
+
+
+
 def beep(self):
     """
     Гудок.
     """
 
+    """
     return self.protocol.command(
         0x13,
         self.password
+    )
+    """
+
+    return self.protocol.command_nopass(
+        0x13
     )
 beep.cmd = 0x13
 
@@ -81,6 +151,7 @@ def reset_settings(self):
         0x16
     )
 reset_settings.cmd = 0x16
+
 
 
 def print_string(self, string, control_tape=True, cash_tape=True):

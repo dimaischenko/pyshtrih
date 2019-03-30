@@ -95,6 +95,8 @@ def discovery(callback=None, port=None, baudrate=None):
                     device_cls = device.ShtrihLight02F
                 elif u'МИНИ-01Ф' in d.name:
                     device_cls = device.ShtrihMini01F
+                elif u'ШТРИХ-ПРИНТ' in d.name:
+                    device_cls = device.ShtrihPrint
 
                 if device_cls:
                     discovered_device = device_cls(p, b)
